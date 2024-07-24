@@ -1,0 +1,27 @@
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "quantity": 5,
+      "article": "Dauerlutscher",
+      "price": 3.7
+    }
+  ]
+}
+
+###
+
+GET http://localhost:8080/orders
+
+> {%
+    client.global.set("id",response.body[0].id);
+%}
+
+###
+
+< {%
+    request.variables.set("id",client.global.get("id"))
+%}
+GET http://localhost:8080/orders/{{id}}
