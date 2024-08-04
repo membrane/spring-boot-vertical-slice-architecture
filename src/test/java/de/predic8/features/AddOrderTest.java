@@ -15,6 +15,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Tests API, mediator, handler and database.
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 class AddOrderTest {
@@ -42,19 +45,13 @@ class AddOrderTest {
                             }"""))
                 .andDo(print())
                 .andExpect(status().isCreated());
-        
-        String location = r.andReturn().getResponse().getHeader("Location");
 
-        System.out.println("location = " + location);
+        JsonNode json = om.readTree(r.andReturn().getResponse().getContentAsString());
 
-        JsonNode n = om.readTree(r.andReturn().getResponse().getContentAsString());
-
-        assertEquals(2,n.size());
-
-        JsonNode order1 = n.get(0);
+        assertEquals(2,json.size());
 
         assertDoesNotThrow(() -> {
-            UUID.fromString(order1.get("id").asText());
+            UUID.fromString(json.get("id").asText());
         });
     }
 }

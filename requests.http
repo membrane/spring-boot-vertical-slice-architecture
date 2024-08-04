@@ -25,3 +25,18 @@ GET http://localhost:8080/orders
     request.variables.set("id",client.global.get("id"))
 %}
 GET http://localhost:8080/orders/{{id}}
+
+###
+
+PUT http://localhost:8080/orders/{{id}}
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "quantity": 99,
+      "article": "Dauerlutscher",
+      "price": 2.98
+    }
+  ]
+}

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 @RestController
 class AddOrderApi {
 
@@ -17,12 +19,13 @@ class AddOrderApi {
     }
 
     @PostMapping("/orders")
-    UUID add(@RequestBody AddOrderCommand command) throws Throwable {
+    @ResponseStatus(CREATED)
+    Order add(@RequestBody AddOrderCommand command) throws Throwable {
         return mediator.send(command);
     }
 }
 
-record AddOrderCommand(List<Item> items) implements IRequest<UUID> { }
+record AddOrderCommand(List<Item> items) implements IRequest<Order> { }
 
 @Validator
 class AddValidator {
@@ -44,9 +47,7 @@ class AddHandler {
         this.repo = repo;
     }
 
-    UUID add(AddOrderCommand command) {
-        return repo.save(new Order() {{
-            setItems(command.items());
-        }}).getId();
+    Order add(AddOrderCommand command) {
+        return repo.save(new Order(command.items()));
     }
 }

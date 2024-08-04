@@ -10,7 +10,7 @@
     </parent>
     <groupId>de.predic8</groupId>
     <artifactId>spring-boot-vertical-slice-architecture</artifactId>
-    <version>0.0.1</version>
+    <version>0.2.0</version>
     <name>spring-boot-vertical-slice-architecture</name>
     <description>Sample project for the Vertical Slice Architecture with Java and Spring Boot</description>
     <url/>
@@ -32,7 +32,7 @@
     </developers>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -46,7 +46,7 @@
         <dependency>
             <groupId>io.membrane-api</groupId>
             <artifactId>jmediator-spring-boot-starter</artifactId>
-            <version>0.1.0</version>
+            <version>0.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>

@@ -19,6 +19,12 @@ public class Order {
     @OneToMany(cascade = ALL)
     List<Item> items;
 
+    public Order() {}
+
+    public Order(List<Item> items) {
+        this.items = items;
+    }
+
     public UUID getId() {
         return id;
     }

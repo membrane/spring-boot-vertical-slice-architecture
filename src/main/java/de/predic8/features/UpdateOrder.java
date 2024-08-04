@@ -16,12 +16,12 @@ class UpdateOrderApi {
     }
 
     @PutMapping ("/orders/{id}")
-    UUID add(@PathVariable UUID id, @RequestBody Order order) throws Throwable {
-        return mediator.send(new UpdateOrderCommand(id,order));
+    void add(@PathVariable UUID id, @RequestBody Order order) throws Throwable {
+        mediator.send(new UpdateOrderCommand(id,order));
     }
 }
 
-record UpdateOrderCommand(UUID id, Order items) implements IRequest<UUID> { }
+record UpdateOrderCommand(UUID id, Order items) implements IRequest<Void> { }
 
 
 @Handler
@@ -33,11 +33,10 @@ class UpdateHandler {
         this.repo = repo;
     }
 
-    UUID add(AddOrderCommand command) {
+    UUID update(UpdateOrderCommand command) {
 
-        Order order = new Order();
-        order.setItems(command.items());
-
+        Order order = repo.getReferenceById(command.id());
+        order.setItems(command.items().getItems());
         return repo.save(order).getId();
     }
 }
