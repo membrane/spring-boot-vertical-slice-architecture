@@ -5,6 +5,7 @@ import jakarta.persistence.Table;
 
 import java.util.*;
 
+import static de.predic8.model.Order.State.CREATED;
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.GenerationType.*;
 
@@ -13,11 +14,12 @@ import static jakarta.persistence.GenerationType.*;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = UUID)
     UUID id;
 
     @OneToMany(cascade = ALL)
     List<Item> items;
+
+    State state = CREATED;
 
     public Order() {}
 
@@ -39,6 +41,18 @@ public class Order {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public enum State {
+        CREATED, ORDERED, CANCELED
     }
 
 }

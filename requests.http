@@ -15,28 +15,17 @@ Content-Type: application/json
 
 GET http://localhost:8080/orders
 
-> {%
-    client.global.set("id",response.body[0].id);
-%}
-
 ###
 
-< {%
-    request.variables.set("id",client.global.get("id"))
-%}
-GET http://localhost:8080/orders/{{id}}
+GET http://localhost:8080/orders/2994d31e-4f94-43fe-ac58-fd65586cc449
 
-###
+### Should work
 
-PUT http://localhost:8080/orders/{{id}}
-Content-Type: application/json
+PUT http://localhost:8080/orders/2994d31e-4f94-43fe-ac58-fd65586cc449/cancel
 
-{
-  "items": [
-    {
-      "quantity": 99,
-      "article": "Dauerlutscher",
-      "price": 2.98
-    }
-  ]
-}
+### Should return 409 Conflict cause order is in the wrong state
+
+PUT http://localhost:8080/orders/8ca418ff-03f1-4fa7-8968-792d6c682a6e/cancel
+
+
+

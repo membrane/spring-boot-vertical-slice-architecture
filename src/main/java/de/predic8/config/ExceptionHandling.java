@@ -21,4 +21,12 @@ public class ExceptionHandling extends ResponseEntityExceptionHandler {
         pd.setType(new URI("http://predic8.de/vertical-slice"));
         return pd;
     }
+
+    @ExceptionHandler(WrongStateException.class)
+    public ProblemDetail handleCustomException(WrongStateException e, WebRequest r) throws URISyntaxException {
+        ProblemDetail pd = forStatusAndDetail(CONFLICT, "Wrong state!");
+        pd.setTitle("Wrong state for action!");
+        pd.setType(new URI("http://predic8.de/vertical-slice"));
+        return pd;
+    }
 }
