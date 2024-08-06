@@ -48,7 +48,7 @@ class AddOrderTest {
 
         JsonNode json = om.readTree(r.andReturn().getResponse().getContentAsString());
 
-        assertEquals(2,json.size());
+        assertEquals(3,json.size());
 
         assertDoesNotThrow(() -> {
             UUID.fromString(json.get("id").asText());

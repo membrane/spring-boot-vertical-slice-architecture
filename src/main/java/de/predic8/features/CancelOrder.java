@@ -3,14 +3,13 @@ package de.predic8.features;
 import de.predic8.exceptions.*;
 import de.predic8.model.*;
 import io.membrane_api.jmediator.*;
-import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 import static de.predic8.model.Order.State.*;
 
-@Controller
+@RestController
 class CancelOrderApi {
 
     JMediator mediator;

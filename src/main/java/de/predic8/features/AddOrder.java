@@ -48,6 +48,8 @@ class AddHandler {
     }
 
     Order add(AddOrderCommand command) {
-        return repo.save(new Order(command.items()));
+        Order o = new Order(command.items());
+        o.setId(UUID.randomUUID());
+        return repo.save(o);
     }
 }
