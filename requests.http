@@ -1,3 +1,7 @@
+GET http://localhost:8080/orders/2994d31e-4f94-43fe-ac58-fd65586cc449
+
+
+
 POST http://localhost:8080/orders
 Content-Type: application/json
 
@@ -17,7 +21,6 @@ GET http://localhost:8080/orders
 
 ###
 
-GET http://localhost:8080/orders/2994d31e-4f94-43fe-ac58-fd65586cc449
 
 ### Should work
 
